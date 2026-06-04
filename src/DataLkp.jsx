@@ -1,303 +1,7 @@
 import React, { useState } from 'react';
 
-// Data LKP Resmi yang dikelompokkan berdasarkan Kecamatan di Karawang
-const lkpData = [
-  {
-    id: 1,
-    nama: "LPK PT. MJI Education Service",
-    bidang: "Bahasa Asing & Program Magang",
-    akreditasi: "B",
-    kecamatan: "Karawang Barat",
-    alamat: "Jl. Proklamasi No.63, Tanjungmekar, Kec. Karawang Barat, Karawang, Jawa Barat 41311",
-    kontak: "0811-9216-980",
-    program: ["Bahasa Jepang Intensif", "Budaya & Etika Kerja Jepang", "Persiapan Magang Jepang"]
-  },
-  {
-    id: 2,
-    nama: "LKP Fujiyama",
-    bidang: "Kursus Keterampilan & Mental Kerja",
-    akreditasi: "B",
-    kecamatan: "Karawang Barat",
-    alamat: "Jl. Otto Iskandar Dinata No.36, Nagasari, Kec. Karawang Barat, Karawang, Jawa Barat 41312",
-    kontak: "0813-1440-0677",
-    program: ["Pelatihan Praktik Kerja", "Komunikasi Dunia Kerja", "Pembinaan Kedisiplinan"]
-  },
-  {
-    id: 3,
-    nama: "LKP Prisma Computer",
-    bidang: "Teknologi Informasi & Komputer",
-    akreditasi: "A",
-    kecamatan: "Karawang Barat",
-    alamat: "Jl. Arif Rahman Hakim (Niaga) No 9, Kec. Karawang Barat, Karawang",
-    kontak: "0813-9433-4777",
-    program: ["Aplikasi Perkantoran", "Teknisi Komputer", "Desain Grafis"]
-  },
-  {
-    id: 4,
-    nama: "LKP Aditya",
-    bidang: "Kursus & Pendidikan Keterampilan",
-    akreditasi: "B",
-    kecamatan: "Karawang Barat",
-    alamat: "Jl. A. Yani Gg. Betet No. 33 Rt.03/Rw.07, Karangpawitan, Kec. Karawang Barat, Karawang",
-    kontak: "0812-8574-7837",
-    program: ["Pendidikan Kecakapan Kerja", "Kursus Dasar"]
-  },
-  {
-    id: 5,
-    nama: "LKP BBC English Training Specialist",
-    bidang: "Kursus & Pendidikan Keterampilan",
-    akreditasi: "B",
-    kecamatan: "Karawang Barat",
-    alamat: "Jl. Kertabumi No. 1 & 2, Karawang Kulon, Kec. Karawang Barat, Kabupaten Karawang, Jawa Barat.",
-    kontak: "0815-1177-7995",
-    program: ["Pendidikan Bahasa"]
-  },
-  {
-    id: 6,
-    nama: "LPK Japan Link Indonesia",
-    bidang: "Pelatihan Bahasa & Budaya Jepang",
-    akreditasi: "B",
-    kecamatan: "Karawang Barat",
-    alamat: "Jl. Jenderal Ahmad Yani No.1, Kel. Karangpawitan, Kec. Karawang Barat, Kab. Karawang, Prov. Jawa Barat 41315",
-    kontak: "085777775301 / 085777775302",
-    program: ["Pelatihan Standar Jepang", "Pembentukan Mental & Kedisiplinan", "Persiapan Karier Jepang"]
-  },
-  {
-    id: 7,
-    nama: "LKP Dewi Welas Asih",
-    bidang: "Tata Busana & Menjahit",
-    akreditasi: "A",
-    kecamatan: "Karawang Barat",
-    alamat: "Jln. Bayang Kara No. 371. F Rt. 09 / Rw. 06, Kel. Tanjung Mekar, Kec. Karawang Barat, Kab. Karawang 41316",
-    kontak: "0813 8168 2865",
-    program: ["Menjahit Pakaian Wanita dan Anak (MPWA)", "Pembuatan Kebaya Inovasi"]
-  },
-  {
-    id: 8,
-    nama: "LKP Ely Stir",
-    bidang: "Kursus Mengemudi",
-    akreditasi: "B",
-    kecamatan: "Karawang Barat",
-    alamat: "Jl. Arif Rahman Hakim No.47, Nagasari, Kec. Karawang Barat, Karawang, Jawa Barat 41312",
-    kontak: "085776660888",
-    program: ["Mengemudi Mobil Manual", "Mengemudi Mobil Matic", "Teori Keselamatan Berlalu Lintas"]
-  },
-  {
-    id: 9,
-    nama: "LPK Gatto Libero Muezza",
-    bidang: "Bahasa Asing & Penempatan Jepang",
-    akreditasi: "B",
-    kecamatan: "Karawang Barat",
-    alamat: "Jln Panatayuda II No.9, Kec. Karawang Barat, Karawang",
-    kontak: "0267-4870-222 / 0811-5860-0047",
-    program: ["Magang Teknis (TITP)", "Pekerja Terampil Khusus (SSW)", "Pelatihan Etika Kerja Jepang"]
-  },
-  {
-    id: 10,
-    nama: "LKP Ulfah Karawang",
-    bidang: "Tata Riad & Kecantikan",
-    akreditasi: "B",
-    kecamatan: "Karawang Barat",
-    alamat: "Jl. Syech Quro, Kp. Sukahati No.20, Rt.01 Rw.18, Johar Utara, Kelurahan Karawang Wetan, Kecamatan Karawang Timur, Kabupaten Karawang, Jawa Barat",
-    kontak: "0895367289486",
-    program: ["Meningkatkan Keterampilan", "Tata Rias Kecantikan"]
-  },
-
-  // --- KARAWANG TIMUR ---
-
-  {
-    id: 11,
-    nama: "LKP Mitsutomo Gakuin Indonesia",
-    bidang: "Bahasa Asing & Program Magang",
-    akreditasi: "B",
-    kecamatan: "Karawang Timur",
-    alamat: "Jl. Manunggal VII Kp. Citeureup, RT 001/RW 014, Kelurahan Palumbonsari, Kecamatan Karawang Timur, Kabupaten Karawang, Jawa Barat 41314",
-    kontak: "0851-5637-6236",
-    program: ["Pendidikan Bahasa Jepang", "Persiapan Seleksi Magang", "Pelatihan Karakter IM Japan & SSW"]
-  },
-  {
-    id: 12,
-    nama: "LPK JEA Service Indonesia",
-    bidang: "Pendidikan Bahasa & Penempatan Industri",
-    akreditasi: "B",
-    kecamatan: "Karawang Timur",
-    alamat: "Gang Wallet, Jl. Sukamulya, Dusun Sukamulya RT.003/RW.019, Karawang Wetan, Kecamatan Karawang Timur, Karawang",
-    kontak: "0811-1316-734 / 0813-8481-1369",
-    program: ["Technical Internship", "Specified Skilled Worker (SSW)", "Persiapan Kerja Engineering"]
-  },
-  {
-    id: 13,
-    nama: "LPK Akira Gakuin",
-    bidang: "Pendidikan Bahasa & Pembinaan Karakter",
-    akreditasi: "B",
-    kecamatan: "Karawang Timur",
-    alamat: "Jl. Kamboja, Karawang Wetan, Kecamatan Karawang Timur, Kabupaten Karawang, Jawa Barat 41313",
-    kontak: "0895-4015-03162",
-    program: ["Kursus Komunikasi Jepang", "Kesiapan Fisik & Karakter Kerja", "Penyaluran Program Magang"]
-  },
-  {
-    id: 14,
-    nama: "LPK Kessaku Indonesia",
-    bidang: "Pendidikan Bahasa & Budaya Jepang",
-    akreditasi: "B",
-    kecamatan: "Karawang Timur",
-    alamat: "Gedung Karawang Asri Center B21-23, Jl. Surotokunto Rawagabus Post RT. 003 RW. 007, Adiarsa Timur, Kec. Karawang Timur, Karawang",
-    kontak: "+62 267 8604099 / +62 877-3550-1641",
-    program: ["Kurikulum Berbasis Standar Kemenaker", "Pelatihan Bahasa dengan Media Digital", "Etika Kerja & Komunikasi Jepang"]
-  },
-  {
-    id: 15,
-    nama: "LPK Hikari Indonesia",
-    bidang: "Pelatihan Kerja Swasta & Pengiriman Tenaga Kerja",
-    akreditasi: "B",
-    kecamatan: "Karawang Timur",
-    alamat: "Krajan RT.008/RW.002, Desa Palawad, Kecamatan Karawang Timur, Kabupaten Karawang, Jawa Barat 41314",
-    kontak: "0812-9708-2625 / 0822-9968-2864",
-    program: ["Pembelajaran Bahasa Level N5 - N4", "Latihan Fisik & Wawancara Kerja", "Sektor Caregiver, Manufaktur, & Pengolahan Makanan"]
-  },
-  {
-    id: 16,
-    nama: "LPK Akarui Mirai Indonesia",
-    bidang: "Pendidikan Bahasa Asing & Karakter Kerja",
-    akreditasi: "B",
-    kecamatan: "Karawang Timur",
-    alamat: "Perumahan Bumi Karawang Permai, Adiarsa Timur, Kecamatan Karawang Timur, Kabupaten Karawang, Jawa Barat 41313",
-    kontak: "0896-3407-5472 / 0852-9000-0879",
-    program: ["Pelatihan Bahasa Jepang & Korea", "Praktik Kerja Langsung Bidang Industri", "Simulasi Wawancara Perusahaan Luar Negeri"]
-  },
-  {
-    id: 17,
-    nama: "LPK Kashiwado Hasanati Wijaya",
-    bidang: "Pendidikan Bahasa & Pembentukan Karakter Kerja",
-    akreditasi: "B",
-    kecamatan: "Karawang Timur",
-    alamat: "Jl. Griya Kondang Asri Blok R.1 No.12B, RT.19/RW.07, Desa Kondangjaya, Kecamatan Karawang Timur, Karawang",
-    kontak: "0852-8745-6530 / 0813-1073-5613",
-    program: ["Modul Pembelajaran Minna no Nihongo", "Pelatihan Sistem 5S & Karakter Kerja", "Keselamatan Kerja Standar Industri Jepang"]
-  },
-  {
-    id: 18,
-    nama: "LPK Berkah Multiguna Abadi",
-    bidang: "Pengembangan Keterampilan Kerja & Bahasa",
-    akreditasi: "B",
-    kecamatan: "Karawang Timur",
-    alamat: "Perum Puri Asih Permai Blok A, Lingkungan Jl. Sumadiraja Cibungur Indah No.2, RT.01/RW.027, Karawang Wetan, Kec. Karawang Timur, Karawang",
-    kontak: "0811-1619-718 / 0812-2845-3176",
-    program: ["Pelatihan Keterampilan Dunia Industri", "Layanan Informasi Lowongan Kerja", "Peningkatan Kemampuan Komunikasi"]
-  },
-  {
-    id: 19,
-    nama: "LKP Johar Jaya",
-    bidang: "Kursus Stir Mobil & Menjahit",
-    akreditasi: "B",
-    kecamatan: "Karawang Timur",
-    alamat: "Jl. Otto Iskandar Dinata / Jl. Otista Gg. Rafa No.13 Johar, Karawang Wetan, Kecamatan Karawang Timur, Karawang",
-    kontak: "0813-1466-9001 / 0812-8539-0331",
-    program: ["Kursus Mengemudi Praktik Langsung", "Kursus Menjahit Pakaian", "Modul Pelatihan & Pendampingan Pembuatan SIM"]
-  },
-
-  // --- TELUKJAMBE TIMUR ---
-  {
-    id: 20,
-    nama: "LPK Yutaka Education Centre",
-    bidang: "Pendidikan Bahasa & Program Pemagangan",
-    akreditasi: "B",
-    kecamatan: "Telukjambe Timur",
-    alamat: "Perumahan Grand Taruma Ruko Dharmawangsa 3, Blok E23 Jl Tarumanegara Kav 8 Arteri tol Karawang Barat, Desa Sukamakmur, Telukjambe Timur, Karawang",
-    kontak: "0811-9216-980 / 0811-1249-966",
-    program: ["Pelatihan Bahasa Jepang", "Program Caregiver & Study ke Jepang", "Pelatihan Wawancara Seleksi Kerja"]
-  },
-  {
-    id: 21,
-    nama: "LPK Masayuki Mitra Utama",
-    bidang: "Persiapan Kerja Luar Negeri & Bahasa",
-    akreditasi: "B",
-    kecamatan: "Telukjambe Timur",
-    alamat: "Perumnas Bumi Telukjambe, Jl. Baladewa III No.16 Blok PF, Sukaluyu, Telukjambe Timur, Karawang",
-    kontak: "0813-8272-2750",
-    program: ["Bahasa Jepang Tingkat Dasar", "Pelatihan Fisik & Karakter Kerja", "Simulasi Adaptasi Hidup di Jepang"]
-  },
-  {
-    id: 22,
-    nama: "LPK Dwi Karya Prima",
-    bidang: "Pelatihan Keterampilan Industri & Teknik",
-    akreditasi: "B",
-    kecamatan: "Telukjambe Timur",
-    alamat: "Ruko Arcadia, Jl. Galuh Mas Raya No.Blok C22, Sukaharja, Telukjambe Timur, Karawang",
-    kontak: "0852-8207-0868",
-    program: ["Tokutei Ginou (SSW) & Pemapanan Kerja", "Workshop Produktivitas Mesin Industri", "Pelatihan Teknik Las Kualifikasi Global"]
-  },
-  {
-    id: 23,
-    nama: "LPK Nikkou Gakkou",
-    bidang: "Persiapan Kerja & Magang Vokasi",
-    akreditasi: "B",
-    kecamatan: "Telukjambe Timur",
-    alamat: "Ruko Sentraland Business Park, Blok KA 7, Sukaluyu, Telukjambe Timur, Karawang",
-    kontak: "0811-8972-73 / 0812-8216-1382",
-    program: ["Pelatihan Intensif Bahasa Jepang", "Pembinaan Etika & Budaya Kerja", "Bimbingan Adaptasi Lingkungan Industri"]
-  },
-  {
-    id: 24,
-    nama: "LPK Japindo Karawang",
-    bidang: "Pendidikan Bahasa & Keterampilan Teknis",
-    akreditasi: "B",
-    kecamatan: "Telukjambe Timur",
-    alamat: "Perumnas Bumi Telukjambe Blok F No. 25, Sukaluyu, Telukjambe Timur, Karawang",
-    kontak: "0811-9350-995",
-    program: ["Materi Bahasa & Kebudayaan Jepang", "Sistem Pembinaan Kedisiplinan Kerja", "Pelatihan Wawancara Industri Global"]
-  },
-  {
-    id: 25,
-    nama: "LKP Farina",
-    bidang: "Kursus Kecantikan & Tata Rias",
-    akreditasi: "B",
-    kecamatan: "Telukjambe Timur",
-    alamat: "Sukaharja, Telukjambe Timur, Karawang",
-    kontak: "0813-9970-1118",
-    program: ["Make Up & Tata Rambut", "Perawatan Wajah (Facial/Manicure/Pedicure)", "Uji Kompetensi Keterampilan Beauty Care"]
-  },
-  {
-    id: 26,
-    nama: "Sekai Elite Education & Training Centre",
-    bidang: "Pendidikan Vokasi & Pelatihan Bahasa Asing",
-    akreditasi: "B",
-    kecamatan: "Telukjambe Timur",
-    alamat: "Jl. Arteri Ruko Citywalk Galuh Mas, Blok IX A2 No.03, Puseurjaya, Karawang",
-    kontak: "0811-9790-876",
-    program: ["Bahasa Jepang, Inggris, Mandarin, Korea, Jerman", "Management Kaizen & Soft Skill Vokasi", "Program Translator & Translation"]
-  },
-  {
-    id: 27,
-    nama: "LPK Mitra Jinzai Indonesia",
-    bidang: "Pengembangan Bahasa & Sending Organization",
-    akreditasi: "B",
-    kecamatan: "Telukjambe Timur",
-    alamat: "Perum Prima Blok C1 No 1 Sukaharja, Telukjambe Timur, Kab. Karawang",
-    kontak: "0821-2799-5151",
-    program: ["Bahasa Komunikasi Kerja Harian", "Sektor Pelatihan Kerja Khusus (Kaigo/Pertanian)", "Pengurusan Legalitas Dokumen Penempatan"]
-  },
-  {
-    id: 28,
-    nama: "LPK Galuh Berkarya",
-    bidang: "Persiapan Tenaga Kerja & Pembentukan Karakter",
-    akreditasi: "B",
-    kecamatan: "Telukjambe Timur",
-    alamat: "Ruko Emporium VII VC-15 Galuh Mas Raya, Sukaharja, Telukjambe Timur, Karawang",
-    kontak: "0812-1362-1200",
-    program: ["Bahasa Jepang Umum & Ujian Sertifikasi", "Pembinaan Fisik & Mental Industri", "Sektor Pelatihan Kaigo, Pertanian, & Perhotelan"]
-  },
-  {
-    id: 29,
-    nama: "ABC Baking Center",
-    bidang: "Pelatihan Keterampilan Kuliner & Tata Boga",
-    akreditasi: "B",
-    kecamatan: "Telukjambe Timur",
-    alamat: "Ruko Bharata Blok U No.10 Lantai 3, Galuhmas, Karawang",
-    kontak: "0877-8812-6622",
-    program: ["Teknik Pembuatan Roti & Roti Manis", "Seni Dekorasi Kue, Pastry, & Dessert", "Pelatihan Pengemasan & Peluang Usaha Kuliner"]
-  }
-];
+// Data LKP Resmi yang dikelompokkan berdasarkan Kecamatan di Karawang diimpor dari berkas JSON
+import lkpData from './data/lkpData.json';
 
 const kecamatanList = [
   { name: "Karawang Barat", icon: "🏢", desc: "Pusat pemerintahan dan bisnis komersial Karawang." },
@@ -305,9 +9,8 @@ const kecamatanList = [
   { name: "Telukjambe Timur", icon: "🎓", desc: "Kawasan pusat pendidikan tinggi dan residensial modern." }
 ];
 
-export default function DataLkp() {
-  const [selectedKecamatan, setSelectedKecamatan] = useState(null);
-  const [searchTerm, setSearchTerm] = useState("");
+export default function DataLkp({ onViewDetail, selectedKecamatan, setSelectedKecamatan, searchTerm, setSearchTerm }) {
+  const [activeMapLkp, setActiveMapLkp] = useState(null);
 
   const filteredLkp = lkpData.filter(lkp => {
     const matchesKecamatan = lkp.kecamatan === selectedKecamatan;
@@ -406,29 +109,25 @@ export default function DataLkp() {
                         {lkp.nama} <span className="text-sm font-medium text-amber-500 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200 ml-1">Akreditasi {lkp.akreditasi}</span>
                       </h3>
 
-                      {/* Info Alamat & Kontak */}
-                      <div className="space-y-1.5 mt-3 text-sm text-slate-600">
-                        <p>📍 {lkp.alamat}</p>
-                        <p>📞 {lkp.kontak}</p>
-                      </div>
-
-                      {/* List Program Pelatihan */}
-                      <div className="mt-4 pt-4 border-t border-slate-100">
-                        <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Program Tersedia:</h4>
-                        <div className="flex flex-wrap gap-1.5">
-                          {lkp.program.map((prog, idx) => (
-                            <span key={idx} className="bg-slate-100 text-slate-700 text-xs px-2.5 py-1 rounded font-medium border border-slate-200">
-                              {prog}
-                            </span>
-                          ))}
-                        </div>
+                      {/* Kecamatan */}
+                      <div className="mt-3 text-sm text-slate-500 font-semibold flex items-center gap-1.5">
+                        <span>📍 Kecamatan {lkp.kecamatan}</span>
                       </div>
                     </div>
 
                     {/* Tombol Aksi */}
-                    <div className="mt-6 pt-4 border-t border-slate-100">
-                      <button className="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-2.5 rounded-lg text-sm border border-slate-300 transition text-center">
+                    <div className="mt-6 pt-4 border-t border-slate-100 flex gap-3">
+                      <button 
+                        onClick={() => onViewDetail(lkp.id)}
+                        className="flex-grow bg-slate-50 hover:bg-slate-100 text-slate-700 font-semibold py-2.5 rounded-lg text-sm border border-slate-200 transition text-center"
+                      >
                         Detail Lembaga
+                      </button>
+                      <button 
+                        onClick={() => setActiveMapLkp(lkp)}
+                        className="flex-grow bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg text-sm transition text-center flex items-center justify-center gap-1.5 shadow-sm"
+                      >
+                        📍 Lihat Peta
                       </button>
                     </div>
 
@@ -444,6 +143,92 @@ export default function DataLkp() {
         )}
 
       </div>
+
+      {/* MODAL POPUP PETA INTERAKTIF */}
+      {activeMapLkp && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/70 backdrop-blur-xs p-4"
+          style={{
+            animation: 'modalFade 0.2s ease-out forwards'
+          }}
+          onClick={() => setActiveMapLkp(null)}
+        >
+          {/* Tag Style untuk Animasi Kustom Premium */}
+          <style>{`
+            @keyframes modalFade {
+              from { opacity: 0; }
+              to { opacity: 1; }
+            }
+            @keyframes modalZoom {
+              from { transform: scale(0.95); opacity: 0; }
+              to { transform: scale(1); opacity: 1; }
+            }
+          `}</style>
+          
+          <div 
+            className="bg-white rounded-2xl w-full max-w-2xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]"
+            style={{
+              animation: 'modalZoom 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards'
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header Modal */}
+            <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+              <div>
+                <h3 className="font-extrabold text-slate-900 text-lg leading-tight">
+                  {activeMapLkp.nama}
+                </h3>
+                <p className="text-xs text-blue-600 font-semibold mt-0.5">
+                  Kecamatan {activeMapLkp.kecamatan}
+                </p>
+              </div>
+              <button 
+                onClick={() => setActiveMapLkp(null)}
+                className="text-slate-400 hover:text-slate-600 transition p-1.5 hover:bg-slate-100 rounded-full text-lg leading-none"
+                aria-label="Close Map"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Area Peta Iframe */}
+            <div className="relative flex-grow bg-slate-100 min-h-[320px] sm:min-h-[400px] h-[50vh]">
+              <iframe
+                title={`Peta Lokasi ${activeMapLkp.nama}`}
+                src={`https://maps.google.com/maps?q=${encodeURIComponent(activeMapLkp.nama + ' ' + activeMapLkp.alamat)}&t=&z=16&ie=UTF8&iwloc=&output=embed`}
+                className="absolute inset-0 w-full h-full border-0"
+                allowFullScreen=""
+                loading="lazy"
+              ></iframe>
+            </div>
+
+            {/* Footer Modal */}
+            <div className="p-6 border-t border-slate-100 bg-slate-50 space-y-4">
+              <div className="text-sm text-slate-600 space-y-1">
+                <p className="font-bold text-slate-800">Alamat:</p>
+                <p className="text-justify leading-relaxed">{activeMapLkp.alamat}</p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                <button 
+                  onClick={() => setActiveMapLkp(null)}
+                  className="flex-1 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold py-2.5 rounded-lg text-sm transition"
+                >
+                  Tutup Peta
+                </button>
+                <a 
+                  href={activeMapLkp.mapsUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 rounded-lg text-sm transition text-center flex items-center justify-center gap-1.5 shadow-sm"
+                >
+                  🌐 Buka di Google Maps App
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
     </section>
   );
 }
