@@ -6,10 +6,14 @@ import karawangImg from './assets/karawang.png';
 import DataLkp from './DataLkp'; 
 import Profile from './Profile';
 import About from './About';
+import DetailLkp from './DetailLkp';
 
 function App() {
-  // State manajemen halaman aktif ('beranda', 'data-lkp', 'profile', atau 'about')
+  // State manajemen halaman aktif ('beranda', 'data-lkp', 'profile', 'about', atau 'detail-lkp')
   const [currentPage, setCurrentPage] = useState('beranda');
+  const [selectedLkpId, setSelectedLkpId] = useState(null);
+  const [selectedKecamatan, setSelectedKecamatan] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800 font-sans flex flex-col justify-between">
@@ -96,7 +100,7 @@ function App() {
               <li>
                 <button 
                   onClick={() => setCurrentPage('data-lkp')} 
-                  className={`pb-1 transition font-bold ${currentPage === 'data-lkp' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-slate-500 hover:text-blue-500'}`}
+                  className={`pb-1 transition font-bold ${(currentPage === 'data-lkp' || currentPage === 'detail-lkp') ? 'text-blue-600 border-b-2 border-blue-600' : 'text-slate-500 hover:text-blue-500'}`}
                 >
                   Data LKP
                 </button>
@@ -151,7 +155,21 @@ function App() {
         )}
 
         {/* Pemanggilan komponen dinamis */}
-        {currentPage === 'data-lkp' && <DataLkp />}
+        {currentPage === 'data-lkp' && (
+          <DataLkp 
+            selectedKecamatan={selectedKecamatan}
+            setSelectedKecamatan={setSelectedKecamatan}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            onViewDetail={(id) => {
+              setSelectedLkpId(id);
+              setCurrentPage('detail-lkp');
+            }} 
+          />
+        )}
+        {currentPage === 'detail-lkp' && (
+          <DetailLkp lkpId={selectedLkpId} onBack={() => setCurrentPage('data-lkp')} />
+        )}
         {currentPage === 'profile' && <Profile />}
         {currentPage === 'about' && <About />}
       </div>
