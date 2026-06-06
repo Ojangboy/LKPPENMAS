@@ -254,7 +254,7 @@ export default function DetailLkp({ lkpId, onBack }) {
             </div>
 
             <a 
-              href={lkp.mapsUrl}
+              href={lkp.mapsUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(lkp.nama + ' ' + lkp.alamat)}`}
               target="_blank"
               rel="noreferrer"
               className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-xl text-sm transition text-center flex items-center justify-center gap-1.5 shadow-sm"

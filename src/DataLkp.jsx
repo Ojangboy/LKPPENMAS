@@ -216,7 +216,7 @@ export default function DataLkp({ onViewDetail, selectedKecamatan, setSelectedKe
                   Tutup Peta
                 </button>
                 <a 
-                  href={activeMapLkp.mapsUrl}
+                  href={activeMapLkp.mapsUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(activeMapLkp.nama + ' ' + activeMapLkp.alamat)}`}
                   target="_blank"
                   rel="noreferrer"
                   className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 rounded-lg text-sm transition text-center flex items-center justify-center gap-1.5 shadow-sm"
